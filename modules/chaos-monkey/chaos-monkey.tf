@@ -47,10 +47,6 @@ resource "aws_iam_role_policy_attachment" "chaos_monkey_role_ec2_full_access" {
 
 data "template_file" "monkey_user_data" {
   template = "${file("${path.module}/monkey-userdata.tpl")}"
-
-  vars {
-    aws_region = "${var.region}"
-  }
 }
 
 resource "aws_instance" "chaos_monkey" {

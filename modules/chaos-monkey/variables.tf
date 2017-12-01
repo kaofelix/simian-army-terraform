@@ -1,12 +1,3 @@
-variable "region" {
-  default = "eu-central-1"
-}
-
-variable "name_prefix" {
-  default = ""
-  type = "string"
-}
-
 variable "vpc_id" {
   type = "string"
 }
@@ -25,5 +16,10 @@ variable "instance_type" {
 }
 
 variable "sshkeyname" {
+  type = "string"
+}
+
+variable "name_prefix" {
+  default = ""
   type = "string"
 }
