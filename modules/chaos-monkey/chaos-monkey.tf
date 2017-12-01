@@ -26,7 +26,7 @@ EOF
 
 resource "aws_security_group" "chaos_monkey_instance" {
   name = "Allow chaos monkey to connect to internet"
-  vpc_id = "${aws_vpc.vpc.id}"
+  vpc_id = "${var.vpc_id}"
 
   egress {
     from_port = 0
@@ -36,7 +36,7 @@ resource "aws_security_group" "chaos_monkey_instance" {
   }
 
   tags {
-    Name = "${var.team_name}-chaos-monkey-instance-sg"
+    Name = "${var.name_prefix}chaos-monkey-instance-sg"
   }
 }
 
@@ -54,8 +54,8 @@ data "template_file" "monkey_user_data" {
 }
 
 resource "aws_instance" "chaos_monkey" {
-  subnet_id = "${element(aws_subnet.publicsubnets.*.id, 0)}"
-  ami = "${var.chaos_monkey_ami_id}"
+  subnet_id = "${var.subnet_id}"
+  ami = "${var.ami_id}"
   instance_type = "${var.instance_type}"
   key_name = "${var.sshkeyname}"
   user_data = "${data.template_file.monkey_user_data.rendered}"
@@ -64,7 +64,7 @@ resource "aws_instance" "chaos_monkey" {
   vpc_security_group_ids = ["${aws_security_group.sshaccess.id}", "${aws_security_group.chaos_monkey_instance.id}"]
 
   tags {
-    Name = "monkey_of_chaos"
+    Name = "${var.name_prefix}monkey_of_chaos"
   }
 
   lifecycle {
