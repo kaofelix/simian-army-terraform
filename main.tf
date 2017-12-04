@@ -12,4 +12,13 @@ module "chaos_monkey" {
   name_prefix = "${var.team_name}-"
   subnet_id = "${element(aws_subnet.publicsubnets.*.id, 0)}"
   vpc_id = "${aws_vpc.vpc.id}"
+
+  # Example config:
+  # Unleash the monkey to attack ASGs once every minute with 50% chance
+  calendar_ismonkeytime = "true"
+  chaos_leashed = "false"
+  chaos_asg_enabled = "true"
+  scheduler_frequency = "1"
+  scheduler_frequencyunit = "MINUTES"
+  chaos_asg_probability = "180.0"
 }
