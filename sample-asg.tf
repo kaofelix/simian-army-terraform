@@ -46,7 +46,7 @@ resource "aws_security_group" "elb_sg" {
 }
 
 data "template_file" "yocto_userdata" {
-  template = "${file("${path.module}/templatesyocto-userdata.tpl")}"
+  template = "${file("${path.module}/templates/yocto-userdata.tpl")}"
 }
 
 resource "aws_launch_configuration" "yocto_lc" {
