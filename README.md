@@ -16,7 +16,7 @@ as those get converted to `"0"` and `"1"` and the image needs the actual words `
 
 ## Sample ASG
 
-This just brings up an AWS Auto Scaling Group that manages up to 1 instance running [yocto-httpd](https://github.com/felixb/yocto-httpd) in order
+This just brings up an AWS Auto Scaling Group that manages 1 instance running [yocto-httpd](https://github.com/felixb/yocto-httpd) in order
 for the monkey to have something to attack and so we're able to see it in action.
 
 ## Using it on your own infrastructure
