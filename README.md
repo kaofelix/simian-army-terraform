@@ -18,3 +18,26 @@ as those get converted to `"0"` and `"1"` and the image needs the actual words `
 
 This just brings up an AWS Auto Scaling Group that manages up to 1 instance running [yocto-httpd](https://github.com/felixb/yocto-httpd) in order
 for the monkey to have something to attack and so we're able to see it in action.
+
+## Using it on your own infrastructure
+
+In order to make use of the Simian Army module, you only need to copy the `./modules/simian-army` folder to where you keep your own Terraform modules.
+Then on your `main.tf` or whatever other `.tf` file you find appropriate, use the module like this:
+
+```hcl
+module "simian_army" {
+  name_prefix = "<optional name prefix that will be appended to the instance name>"
+  source = "./modules/simian-army" # adapt this if you're using a different folder
+  ami_id = "<AMI you would like to use for your simian army instace>"
+  sshkeyname = "<SSH key so you can log into your simian army box and have a look inside>"
+  subnet_id = "<ID of the subnet for your simian army instance>"
+  vpc_id = "<ID of the VPC for your simian army instance>"
+
+  # Configure your chaos monkey with your preferred values.
+  chaos_leashed = "false"
+  chaos_asg_enabled = "true"
+  scheduler_frequency = "1"
+  scheduler_frequencyunit = "HOUR"
+  chaos_asg_probability = "1.0"
+}
+```

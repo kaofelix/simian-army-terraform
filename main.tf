@@ -5,7 +5,7 @@ provider "aws" {
 
 data "aws_availability_zones" "current" {}
 
-module "chaos_monkey" {
+module "simian_army" {
   source = "./modules/simian-army"
   ami_id = "${var.simian_army_ami_id}"
   sshkeyname = "${var.sshkeyname}"
