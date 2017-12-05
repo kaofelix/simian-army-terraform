@@ -5,7 +5,7 @@ resource "aws_vpc" "vpc" {
   }
 }
 
-resource "aws_subnet" "publicsubnets" {
+resource "aws_subnet" "public_subnets" {
   count = "${length(data.aws_availability_zones.current.names)}"
   cidr_block = "${cidrsubnet(aws_vpc.vpc.cidr_block, 5, count.index)}"
   vpc_id = "${aws_vpc.vpc.id}"
@@ -32,7 +32,7 @@ resource "aws_route_table" "routetable" {
   }
 }
 
-resource "aws_route" "routepublic" {
+resource "aws_route" "route_public" {
   depends_on = [
     "aws_internet_gateway.igw"
   ]
@@ -41,8 +41,8 @@ resource "aws_route" "routepublic" {
   gateway_id = "${aws_internet_gateway.igw.id}"
 }
 
-resource "aws_route_table_association" "subnettopublic" {
+resource "aws_route_table_association" "subnet_to_public" {
   count = "${length(data.aws_availability_zones.current.names)}"
   route_table_id = "${aws_route_table.routetable.id}"
-  subnet_id = "${element(aws_subnet.publicsubnets.*.id, count.index)}"
+  subnet_id = "${element(aws_subnet.public_subnets.*.id, count.index)}"
 }

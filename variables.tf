@@ -20,7 +20,7 @@ variable "ami_id" {
   type = "string"
 }
 
-variable "chaos_monkey_ami_id" {
+variable "simian_army_ami_id" {
   type = "string"
 }
 

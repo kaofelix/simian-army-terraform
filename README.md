@@ -1,14 +1,14 @@
-# Chaos Monkey Terraform
+# Simian Army Terraform
 
 This contains a Terraform module to bring up an EC2 instance running [Netflix's Simian Army](https://github.com/Netflix/SimianArmy),
 their first implementation of chaos monkey and some sample code.
 
-## chaos-monkey module
+## simian-army module
 
 The module sets up a [Simian Army docker image](https://hub.docker.com/r/mlafeldt/simianarmy/). Most configuration
 properties in the image are exposed through module variables with the same default values. You can refer to these properties
 [here](https://github.com/mlafeldt/docker-simianarmy/blob/master/docs/configuration-properties.md).
-The naming should be adapted by converting / to _ and dropping the simianarmy prefix, whereas a property listed as
+The naming should be adapted by converting / to _ and dropping the redundant simianarmy prefix, whereas a property listed as
 "/simianarmy/client/aws/accountkey" become "client_aws_accountkey".
 
 Also keep in mind that properties with boolean values should not use unquoted `true` and `false` keywords in terraform
