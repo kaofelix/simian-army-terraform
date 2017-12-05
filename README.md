@@ -5,8 +5,8 @@ their first implementation of chaos monkey and some sample code.
 
 ## simian-army module
 
-The module sets up a [Simian Army docker image](https://hub.docker.com/r/mlafeldt/simianarmy/). Most configuration
-properties in the image are exposed through module variables with the same default values. You can refer to these properties
+The module brings up an EC2 instance running a [Simian Army docker image](https://hub.docker.com/r/mlafeldt/simianarmy/). Most configuration
+properties in the image are exposed through terraform module variables with the same default values. You can refer to these properties
 [here](https://github.com/mlafeldt/docker-simianarmy/blob/master/docs/configuration-properties.md).
 The naming should be adapted by converting / to _ and dropping the redundant simianarmy prefix, whereas a property listed as
 "/simianarmy/client/aws/accountkey" become "client_aws_accountkey".
@@ -16,5 +16,5 @@ as those get converted to `"0"` and `"1"` and the image needs the actual words `
 
 ## Sample ASG
 
-This just brings up an AWS ASG that runs 1 instance running [yocto-httpd](https://github.com/felixb/yocto-httpd) in order
-for the monkey to have something to attack and we're able to see it in action.
+This just brings up an AWS Auto Scaling Group that manages up to 1 instance running [yocto-httpd](https://github.com/felixb/yocto-httpd) in order
+for the monkey to have something to attack and so we're able to see it in action.
