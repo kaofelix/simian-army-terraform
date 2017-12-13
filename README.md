@@ -41,3 +41,24 @@ module "simian_army" {
   chaos_asg_probability = "1.0"
 }
 ```
+
+## Interacting With Your Simian Army Instance
+
+The public ip of the instance is exposed through a terraform output from the module as `public_ip` and then again through the example code as `simian_army_public_ip`.
+So when running this example you can run
+
+```
+terraform output simian_army_public_ip
+```
+
+to get the public ip of the instance. You can use this in your commands so you don't need to worry about the actual ip, for example:
+
+* SSH into the instance
+    ```
+    ssh -i <path to your key> ec2-user@$(terraform output simian_army_public_ip)
+    ```
+
+* Make Rest API calls
+    ```
+    curl "http://$(terraform output simian_army_public_ip):8080/simianarmy/api/v1/chaos"
+    ```
